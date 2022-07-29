@@ -1,3 +1,4 @@
+const passport = require('passport');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
@@ -17,7 +18,18 @@ const getLogout = (req, res) => {
 };
 
 // POST /login
-const postUser = (req, res) => {
+const postUser = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) { return next(err); }
+    if (!user) {
+      return res.redirect('/error=true');
+    }
+    req.logIn(user, (err) => {
+      if (err) { return next(err); }
+      console.log(user);
+      res.send('Logged in!');
+    });
+  })(req, res, next);
 
 };
 

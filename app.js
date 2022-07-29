@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
 require('dotenv').config({ path: './config/.env' });
 const connectDB = require('./config/db');
+const MongoStore = require('connect-mongo');
+const passport = require('passport');
 const indexRoutes = require('./routes/index');
 
 // Settings
@@ -14,8 +17,17 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // Session Setup
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.DB_STRING })
+}));
 
 // Passport Setup
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/', indexRoutes);
