@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const indexRoutes = require('./routes/index');
+const gardenRoutes = require('./routes/garden');
 
 // Settings
 app.set('view engine', 'ejs');
@@ -31,6 +32,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/', indexRoutes);
+app.use('/garden', gardenRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {
