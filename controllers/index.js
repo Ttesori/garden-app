@@ -75,7 +75,7 @@ const postRegister = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  res.send('Signed up!');
+  res.redirect('/garden');
 };
 
 module.exports = { getIndex, getRegister, getLogout, postUser, postRegister };

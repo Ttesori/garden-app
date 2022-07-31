@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
+  <%- include('../_partials/head.ejs') %>
+    <title>Garden Dashboard</title>
 </head>
 
 <body>
-  <h1>Welcome, <%= user.display_name %>!</h1>
-  <a href="/logout">Log Out</a>
+  <%- include('../_partials/header.ejs') %>
+    <%- include('../_partials/garden/user_nav.ejs') %>
+      <h2>Welcome, <%= user.display_name %>!</h2>
+
+      <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>

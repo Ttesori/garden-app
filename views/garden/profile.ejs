@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../_partials/head.ejs') %>
+    <title>Profile</title>
+</head>
+
+<body>
+  <%- include('../_partials/header.ejs') %>
+    <%- include('../_partials/garden/user_nav.ejs') %>
+      <h2>User Profile</h2>
+      <% if (locals.msg) { %>
+        <div class="alert alert-<%= msg.type %>">
+          <%= msg.text %>
+        </div>
+        <% } %>
+          <form method="post" action="/garden/profile">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="<%= user.email %>" required>
+
+            <label for="password">New Password</label>
+            <input type="password" name="password" id="password">
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="<%= user.display_name %>">
+
+            <label for="zone">Garden Zone</label>
+            <input type="text" name="zone" id="zone" value="<%= user.zone %>">
+
+            <button>Update Profile</button>
+          </form>
+          <%- include('../_partials/footer.ejs') %>
+</body>
+
+</html>
