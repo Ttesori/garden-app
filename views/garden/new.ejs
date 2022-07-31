@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../_partials/head.ejs') %>
+    <title>Document</title>
+</head>
+
+<body>
+  <%- include('../_partials/header.ejs') %>
+    <%- include('../_partials/garden/user_nav.ejs') %>
+      <h3>Create a Garden</h3>
+      <form method="post">
+        <div class="form-group">
+          <label for="label">Garden Label</label>
+          <input type="text" name="label" id="label" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="season">Season</label>
+          <input type="text" name="season" id="season" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" name="location" id="location" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="Notes">Notes</label>
+          <textarea type="text" name="Notes" id="Notes" placeholder=""></textarea>
+        </div>
+
+        <button>Create Garden</button>
+      </form>
+
+      <%- include('../_partials/footer.ejs') %>
+</body>
+
+</html>

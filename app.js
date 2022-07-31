@@ -32,7 +32,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/', indexRoutes);
-app.use('/garden', gardenRoutes);
+app.use('/gardens', gardenRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {
