@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Garden = require('../models/Garden');
+const Plant = require('../models/Plant');
 const bcrypt = require('bcrypt');
 
 // GET /
@@ -96,8 +97,10 @@ const postGarden = async (req, res) => {
 };
 const singleGarden = async (req, res) => {
   try {
-    const garden = await Garden.findById(req.params.id);
-    res.render('garden/view', { garden: garden });
+    const gardenId = req.params.id;
+    const garden = await Garden.findById(gardenId);
+    const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
+    res.render('garden/view', { garden: garden, plants: plants });
   } catch (error) {
     console.log(error);
   }

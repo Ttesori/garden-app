@@ -23,37 +23,43 @@
         <%= garden.notes %>
       </li>
       <h4>Plants</h4>
-      <hr>
-      <h3>Update Garden</h3>
-      <form method="post">
-        <div class="form-group">
-          <label for="label">Garden Label</label>
-          <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
-        </div>
+      <% locals.plants.forEach(plant=> { %>
+        <li>
+          <%= plant.name %> (<%= plant.number_of_plants %>)
+        </li>
+        <% }) %>
+          <a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a>
+          <hr>
+          <h3>Update Garden</h3>
+          <form method="post">
+            <div class="form-group">
+              <label for="label">Garden Label</label>
+              <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
+            </div>
 
-        <div class="form-group">
-          <label for="season">Season</label>
-          <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>">
-        </div>
+            <div class="form-group">
+              <label for="season">Season</label>
+              <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>">
+            </div>
 
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>">
-        </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>">
+            </div>
 
-        <div class="form-group">
-          <label for="Notes">Notes</label>
-          <textarea type="text" name="Notes" id="Notes" placeholder=""> <%= garden.notes %> </textarea>
-        </div>
-        <input type="hidden" name="_id" id="_id" value="<%= garden._id %>">
-        <button type="submit">Create Garden</button>
-      </form>
+            <div class="form-group">
+              <label for="Notes">Notes</label>
+              <textarea type="text" name="Notes" id="Notes" placeholder=""> <%= garden.notes %> </textarea>
+            </div>
+            <input type="hidden" name="_id" id="_id" value="<%= garden._id %>">
+            <button type="submit">Create Garden</button>
+          </form>
 
-      <h4>Delete Garden</h4>
-      <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
-          Garden</button></form>
+          <h4>Delete Garden</h4>
+          <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
+              Garden</button></form>
 
-      <%- include('../_partials/footer.ejs') %>
+          <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>
