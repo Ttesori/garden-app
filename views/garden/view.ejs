@@ -28,7 +28,7 @@
       <form method="post">
         <div class="form-group">
           <label for="label">Garden Label</label>
-          <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="">
+          <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
         </div>
 
         <div class="form-group">
@@ -45,7 +45,7 @@
           <label for="Notes">Notes</label>
           <textarea type="text" name="Notes" id="Notes" placeholder=""> <%= garden.notes %> </textarea>
         </div>
-
+        <input type="hidden" name="_id" id="_id" value="<%= garden._id %>">
         <button>Create Garden</button>
       </form>
 
