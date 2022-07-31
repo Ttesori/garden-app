@@ -46,8 +46,12 @@
           <textarea type="text" name="Notes" id="Notes" placeholder=""> <%= garden.notes %> </textarea>
         </div>
         <input type="hidden" name="_id" id="_id" value="<%= garden._id %>">
-        <button>Create Garden</button>
+        <button type="submit">Create Garden</button>
       </form>
+
+      <h4>Delete Garden</h4>
+      <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
+          Garden</button></form>
 
       <%- include('../_partials/footer.ejs') %>
 </body>

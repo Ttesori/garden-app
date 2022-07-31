@@ -132,8 +132,26 @@ const updateGarden = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-
 };
 
-module.exports = { getIndex, getProfile, postProfile, postGarden, newGarden, singleGarden, updateGarden };
+const deleteGarden = async (req, res) => {
+  console.log('working on deleting...');
+  try {
+    const idToDel = req.params.id;
+
+    // Make sure user has permission to delete
+    const garden = await Garden.findById(idToDel);
+    if (garden && (garden.user_id.toString() === req.user._id.toString())) {
+      // Remove garden
+      const resp = await Garden.findByIdAndDelete(idToDel);
+      if (resp) {
+        // Redirect on success
+        res.redirect('/gardens?delete=true');
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getIndex, getProfile, postProfile, postGarden, newGarden, singleGarden, updateGarden, deleteGarden };
