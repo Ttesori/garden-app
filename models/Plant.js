@@ -35,6 +35,10 @@ const PlantSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 }, { timestamps: true });
 

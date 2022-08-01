@@ -13,11 +13,13 @@ const GardenSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    default: ''
   },
   notes: {
     type: String,
-    default: ''
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 
 }, { timestamps: true });
