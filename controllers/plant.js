@@ -52,9 +52,10 @@ const viewPlant = async (req, res) => {
 
 const updatePlant = async (req, res) => {
   try {
-    console.log(req.body);
-    const resp = await Plant.findOneAndUpdate(req.params.id, { ...req.body });
+    console.log('toupdate', req.body);
+    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, req.body);
     if (resp) {
+      console.log(resp);
       res.redirect(`/gardens/plants/${req.params.id}?updated=true`);
     }
   } catch (error) {
