@@ -7,8 +7,7 @@ const TYPES = [
 const newPlant = async (req, res) => {
   try {
     const gardens = await Garden.find({ user_id: req.user._id });
-    console.log(gardens);
-    res.render('garden/plants/new', { gardens: gardens, types: TYPES });
+    res.render('garden/plants/new', { gardens: gardens, types: TYPES, gardenId: req.query.garden });
   } catch (error) {
 
   }

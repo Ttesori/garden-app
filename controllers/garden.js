@@ -128,9 +128,10 @@ const updateGarden = async (req, res) => {
     if (notes !== newGarden.notes) newGarden.notes = notes;
 
     const resp = await Garden.findByIdAndUpdate(_id, newGarden);
+    const plants = await Plant.find({ garden_id: _id, user_id: req.user._id });
     if (resp) {
       console.log(resp);
-      res.render('garden/view', { garden: { ...resp, ...newGarden } });
+      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants });
     }
   } catch (error) {
     console.log(error);

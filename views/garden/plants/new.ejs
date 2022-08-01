@@ -43,7 +43,7 @@
           <label for="garden_id">Garden</label>
           <select id="garden_id" name="garden_id">
             <% gardens.forEach(garden=> { %>
-              <option value="<%= garden._id %>">
+              <option value="<%= garden._id %>" <%=gardenId===garden._id.toString() && 'selected' %>>
                 <%= garden.label %>
               </option>
               <% }) %>
