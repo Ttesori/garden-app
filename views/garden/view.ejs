@@ -25,7 +25,9 @@
       <h4>Plants</h4>
       <% locals.plants.forEach(plant=> { %>
         <li>
-          <%= plant.name %> (<%= plant.number_of_plants %>)
+          <a href="/gardens/plants/<%= plant._id %>">
+            <%= plant.name %>
+          </a> (<%= plant.number_of_plants %>)
         </li>
         <% }) %>
           <a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a>

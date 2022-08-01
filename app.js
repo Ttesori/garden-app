@@ -8,6 +8,7 @@ const passport = require('passport');
 const methodOverride = require('method-override');
 const indexRoutes = require('./routes/index');
 const gardenRoutes = require('./routes/garden');
+const plantRoutes = require('./routes/plants');
 
 // Settings
 app.set('view engine', 'ejs');
@@ -35,6 +36,7 @@ app.use(passport.session());
 // Routes
 app.use('/', indexRoutes);
 app.use('/gardens', gardenRoutes);
+app.use('/gardens/plants', plantRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/head.ejs') %>
+    <title>Document</title>
+</head>
+
+<body>
+  <%- include('../../_partials/header.ejs') %>
+    <%- include('../../_partials/garden/user_nav.ejs') %>
+      <h3>
+
+      </h3>
+
+      <form method="post">
+        <div class="form-group">
+          <label for="name">Plant Name/Variety</label>
+          <input type="text" name="name" id="name" value="<%= plant.name %>" required>
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" name="type" value="<%= plant.type %>">
+            <option value="0">Choose a Type</option>
+            <% types.forEach(type=> { %>
+              <option value="<%= type %>" <%=type===plant.type && 'selected' %>>
+                <%= type %>
+              </option>
+              <% }) %>
+                <option value="misc">Misc</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="number_of_plants">Number of Plants</label>
+          <input type="number" name="number_of_plants" id="number_of_plants" min="1"
+            value="<%= plant.number_of_plants %>">
+        </div>
+
+        <div class="form-group">
+          <label for="planting_date">Planting Date</label>
+          <input type="date" name="planting_date" id="planting_date" value="<%= plant.planting_date %>">
+        </div>
+
+        <div class="form-group">
+          <label for="garden_id">Garden</label>
+          <select id="garden_id" name="garden_id" value="<%= plant.garden_id %>">
+            <% gardens.forEach(garden=> { %>
+              <option value="<%= garden._id %>" <%=garden._id===plant.garden_id && 'selected' %>>
+                <%= garden.label %>
+              </option>
+              <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="source">Source</label>
+          <input type="text" name="source" id="source" value="<%= plant.source %>">
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Growing Notes</label>
+          <textarea type="text" name="notes" id="notes" placeholder=""><%= plant.notes %></textarea>
+        </div>
+
+        <fieldset>
+          <legend>Plant Care</legend>
+          <div class="form_group">
+            <label for="last_water">Last Water</label>
+            <input type="date" name="last_water" id="last_water" value="<%= plant.last_water %>">
+          </div>
+          <div class="form-group">
+            <label for="last_feed">Last Feed</label>
+            <input type="date" name="last_feed" id="last_feed" value="<%= plant.last_feed %>">
+          </div>
+          <div class="form-group">
+            <label for="pest_control">Pest Control</label>
+            <input type="text" name="pest_control" id="pest_control" placeholder="" value="<%= plant.pest_control %>">
+          </div>
+        </fieldset>
+
+        <button>Update Plant</button>
+      </form>
+      <form method="post" action="/gardens/plants/<%= plant._id %>?_method=DELETE"><button type="submit">Remove
+          Plant</button></form>
+
+
+      <%- include('../../_partials/footer.ejs') %>
+</body>
+
+</html>
