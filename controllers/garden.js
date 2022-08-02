@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Garden = require('../models/Garden');
 const Plant = require('../models/Plant');
 const bcrypt = require('bcrypt');
+const { marked } = require('marked');
 
 // GET /
 const getIndex = async (req, res) => {
@@ -99,18 +100,23 @@ const singleGarden = async (req, res) => {
   try {
     const gardenId = req.params.id;
     const garden = await Garden.findById(gardenId);
+    const notes = marked.parse(garden.notes);
+    console.log('parseed', notes);
+
     const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
-    res.render('garden/view', { garden: garden, plants: plants });
+    res.render('garden/view', { garden: garden, plants: plants, notes: notes });
   } catch (error) {
     console.log(error);
   }
 };
 
 const updateGarden = async (req, res) => {
-  const { label, season, location, notes, _id } = req.body;
+  const { label, season, location, notes } = req.body;
+  const gardenId = req.params.id;
+
 
   try {
-    const gardenToUpdate = await Garden.findById(_id);
+    const gardenToUpdate = await Garden.find({ user_id: req.user._id, _id: gardenId });
     const newGarden = {
       label: gardenToUpdate.label,
       season: gardenToUpdate.season,
@@ -118,20 +124,20 @@ const updateGarden = async (req, res) => {
       notes: gardenToUpdate.notes
     };
 
-    if (gardenToUpdate.user_id.toString() !== req.user._id.toString()) {
-      return res.send('You do not have permission to update this garden');
+    if (!gardenToUpdate) {
+      return res.send('Garden not found');
     }
-
+    console.log(notes);
     if (label !== newGarden.label) newGarden.label = label;
     if (season !== newGarden.season) newGarden.season = season;
     if (location !== newGarden.location) newGarden.location = location;
     if (notes !== newGarden.notes) newGarden.notes = notes;
 
-    const resp = await Garden.findByIdAndUpdate(_id, newGarden);
-    const plants = await Plant.find({ garden_id: _id, user_id: req.user._id });
+    const resp = await Garden.findByIdAndUpdate(gardenId, newGarden);
+    const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
     if (resp) {
       console.log(resp);
-      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants });
+      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants, notes: marked.parse(notes) });
     }
   } catch (error) {
     console.log(error);

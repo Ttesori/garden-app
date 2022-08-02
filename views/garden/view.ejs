@@ -3,8 +3,9 @@
 
 <head>
   <%- include('../_partials/head.ejs') %>
-    <title>Garden: <%= garden.label %>
-    </title>
+    <%- include('../_partials/garden/tiny.ejs'); %>
+      <title>Garden: <%= garden.label %>
+      </title>
 </head>
 
 <body>
@@ -20,7 +21,8 @@
         <%= garden.location %>
       </li>
       <li>Notes:
-        <%= garden.notes %>
+        <%- locals.notes %>
+
       </li>
       <h4>Plants</h4>
       <% locals.plants.forEach(plant=> { %>
@@ -53,7 +55,6 @@
               <label for="Notes">Notes</label>
               <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes %></textarea>
             </div>
-            <input type="hidden" name="_id" id="_id" value="<%= garden._id %>">
             <button type="submit">Update Garden</button>
           </form>
 
