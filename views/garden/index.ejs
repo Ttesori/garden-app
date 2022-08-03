@@ -11,7 +11,7 @@
     <%- include('../_partials/garden/user_nav.ejs') %>
       <h2>Welcome, <%= user.display_name %>!</h2>
       <h3>My Gardens</h3>
-      <% gardens.forEach(garden=> { %>
+      <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
         <h4>
           <a href="/gardens/<%= garden._id %>">
             <%= garden.label %>
@@ -21,7 +21,17 @@
         <% }) %>
           <hr>
           <a href="/gardens/new">Create New Garden</a>
-          <%- include('../_partials/footer.ejs') %>
+
+          <h3>Archived Gardens</h3>
+          <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
+            <h4>
+              <a href="/gardens/<%= garden._id %>">
+                <%= garden.label %>
+              </a> (<%= garden.season %>)
+            </h4>
+
+            <% }) %>
+              <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>

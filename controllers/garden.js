@@ -144,6 +144,18 @@ const updateGarden = async (req, res) => {
   }
 };
 
+const archiveGarden = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const resp = await Garden.findOneAndUpdate({ _id: id, user_id: req.user._id }, { active: false });
+    if (resp) {
+      res.redirect('/gardens?archive=true');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteGarden = async (req, res) => {
   console.log('working on deleting...');
   try {
@@ -164,4 +176,4 @@ const deleteGarden = async (req, res) => {
   }
 };
 
-module.exports = { getIndex, getProfile, postProfile, postGarden, newGarden, singleGarden, updateGarden, deleteGarden };
+module.exports = { getIndex, getProfile, postProfile, postGarden, newGarden, singleGarden, updateGarden, deleteGarden, archiveGarden };

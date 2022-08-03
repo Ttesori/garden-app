@@ -13,6 +13,8 @@
     <%- include('../_partials/garden/user_nav.ejs') %>
       <h2>
         <%= garden.label %>
+          <% if (!garden.active) { %> <small>(Archived) </small>
+            <%} %>
       </h2>
       <h3>Season:
         <%= garden.season %>
@@ -34,35 +36,43 @@
         <% }) %>
           <a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a>
           <hr>
-          <h3>Update Garden</h3>
-          <form method="post">
-            <div class="form-group">
-              <label for="label">Garden Label</label>
-              <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
-            </div>
+          <% if (garden.active) { %>
+            <h3>Update Garden</h3>
+            <form method="post">
+              <div class="form-group">
+                <label for="label">Garden Label</label>
+                <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
+              </div>
 
-            <div class="form-group">
-              <label for="season">Season</label>
-              <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>">
-            </div>
+              <div class="form-group">
+                <label for="season">Season</label>
+                <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>">
+              </div>
 
-            <div class="form-group">
-              <label for="location">Location</label>
-              <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>">
-            </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>">
+              </div>
 
-            <div class="form-group">
-              <label for="Notes">Notes</label>
-              <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes %></textarea>
-            </div>
-            <button type="submit">Update Garden</button>
-          </form>
+              <div class="form-group">
+                <label for="Notes">Notes</label>
+                <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes %></textarea>
+              </div>
+              <button type="submit">Update Garden</button>
+            </form>
+            <% } %>
 
-          <h4>Delete Garden</h4>
-          <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
-              Garden</button></form>
+              <h4>Delete Garden</h4>
+              <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
+                  Garden</button></form>
 
-          <%- include('../_partials/footer.ejs') %>
+              <% if (garden.active) { %>
+                <h4>Archive Garden</h4>
+                <form method="post" action="/gardens/<%= garden._id %>/archive"><button type="submit">Archive
+                    Garden</button></form>
+                <% } %>
+
+                  <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>

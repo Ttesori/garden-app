@@ -14,5 +14,6 @@ router.delete('/:id', ensureAuth, gardenController.deleteGarden);
 router.post('/:id', ensureAuth, gardenController.updateGarden);
 router.get('/plants/new', ensureAuth, plantController.newPlant);
 router.post('/plants/new', ensureAuth, plantController.createPlant);
+router.post('/:id/archive', ensureAuth, gardenController.archiveGarden);
 
 module.exports = router;
