@@ -11,9 +11,23 @@
   <%- include('../../_partials/header.ejs') %>
     <%- include('../../_partials/garden/user_nav.ejs') %>
       <h3>
-        <%= plant.name %>
+        <%= plant.name %> <small>(<%= plant.number_of_plants %>)</small>
       </h3>
-      <p>
+      <h4>
+        <%= plant.type %> | Planted <%= plant.planting_date %> in <%= locals.gardenLabel %> from <%= plant.source %>
+      </h4>
+      <ul>
+        <li>Last Water: <%= plant.last_water || 'N/A' %>
+        </li>
+        <li>Last Feed: <%= plant.last_feed || 'N/A' %>
+        </li>
+        <li>Pest Care: <%= plant.pest_control || 'N/A' %>
+        </li>
+      </ul>
+      <p class="notes">
+        <%- plant.notes %>
+      </p>
+      <div class="gallery">
         <% plant.photos.forEach(photo=> { %>
           <img src="<%= photo.url %>">
           <form method="post"
@@ -24,7 +38,10 @@
             <button>X</button>
           </form>
           <%}) %>
-      </p>
+      </div>
+
+
+      <h3>Update Plant</h3>
 
       <form method="post" enctype="multipart/form-data">
         <div class="form-group">

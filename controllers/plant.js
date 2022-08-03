@@ -36,17 +36,19 @@ const createPlant = async (req, res) => {
 
 const viewPlant = async (req, res) => {
   try {
+    console.log('view');
     const plant = await Plant.findOne({ user_id: req.user.id, _id: req.params.id });
     const gardens = await Garden.find({ user_id: req.user._id });
-    console.log(plant);
+    const gardenLabel = gardens.filter(garden => garden._id.toString() === plant.garden_id.toString())[0].label;
+    console.log(gardenLabel);
     if (!plant || !gardens) {
       res.send('Plant not found');
     } else {
-      res.render('garden/plants/view', { plant: plant, types: TYPES, gardens: gardens });
+      res.render('garden/plants/view', { plant: plant, types: TYPES, gardens: gardens, gardenLabel: gardenLabel });
     }
 
   } catch (error) {
-
+    console.log(error);
   }
 
 };
@@ -54,22 +56,23 @@ const viewPlant = async (req, res) => {
 const updatePlant = async (req, res) => {
   try {
     console.log(req.files);
-    const filePath = req.files[0].path;
-    let photoData;
+    const filePath = req?.files[0]?.path;
+    const plant = await Plant.findOne({ _id: req.params.id, user_id: req.user._id });
+
     if (filePath) {
-      photoData = await uploadFile(filePath);
+      const photoData = await uploadFile(filePath);
+      const photoResp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, {
+        photos: [...plant.photos, {
+          public_id: photoData.public_id,
+          url: photoData.url,
+          caption: req.body.photo_caption
+        }]
+      });
+      console.log(photoResp);
     }
-    console.log(photoData);
 
     // Update in DB
-    const plant = await Plant.findOne({ _id: req.params.id, user_id: req.user._id });
-    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, {
-      ...req.body, photos: [...plant.photos, {
-        public_id: photoData.public_id,
-        url: photoData.url,
-        caption: req.body.photo_caption
-      }]
-    });
+    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, req.body);
     if (resp) {
       console.log(resp);
       res.redirect(`/gardens/plants/${req.params.id}?updated=true`);
