@@ -2,10 +2,8 @@
 <html lang="en">
 
 <head>
-  <%- include('../_partials/head.ejs') %>
+  <%- include('../_partials/head.ejs') , {title: garden.label }%>
     <%- include('../_partials/garden/tiny.ejs'); %>
-      <title>Garden: <%= garden.label %>
-      </title>
 </head>
 
 <body>
