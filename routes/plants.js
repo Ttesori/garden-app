@@ -10,5 +10,6 @@ router.post('/new', ensureAuth, plantController.createPlant);
 router.get('/:id', ensureAuth, plantController.viewPlant);
 router.delete('/:id', ensureAuth, plantController.deletePlant);
 router.post('/:id', ensureAuth, upload.array("post_file"), plantController.updatePlant);
+router.delete('/:id/photos', ensureAuth, plantController.deletePhoto);
 
 module.exports = router;

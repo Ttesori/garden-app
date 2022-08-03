@@ -15,7 +15,11 @@
       </h3>
       <p>
         <% plant.photos.forEach(photo=> { %>
-          <img src="<%= photo %>">
+          <img src="<%= photo.url %>">
+          <form method="post"
+            action="/gardens/plants/<%= plant._id %>/photos?_method=DELETE&photo=<%= photo.public_id %>">
+            <button>X</button>
+          </form>
           <%}) %>
       </p>
 

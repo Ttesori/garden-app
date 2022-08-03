@@ -41,7 +41,10 @@ const PlantSchema = new mongoose.Schema({
     default: true
   },
   photos: {
-    type: [String]
+    type: [{
+      public_id: String,
+      url: String
+    }]
   }
 }, { timestamps: true });
 

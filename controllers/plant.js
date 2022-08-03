@@ -55,15 +55,20 @@ const updatePlant = async (req, res) => {
   try {
     console.log(req.files);
     const filePath = req.files[0].path;
-    let link;
+    let photoData;
     if (filePath) {
-      link = await uploadFile(filePath);
+      photoData = await uploadFile(filePath);
     }
-    console.log(link);
+    console.log(photoData);
 
     // Update in DB
     const plant = await Plant.findOne({ _id: req.params.id, user_id: req.user._id });
-    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, { ...req.body, photos: [...plant.photos, link] });
+    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, {
+      ...req.body, photos: [...plant.photos, {
+        public_id: photoData.public_id,
+        url: photoData.url
+      }]
+    });
     if (resp) {
       console.log(resp);
       res.redirect(`/gardens/plants/${req.params.id}?updated=true`);
@@ -81,8 +86,21 @@ function uploadFile(file) {
           if (error) return reject(error);
           //remove temp file
           fs.unlinkSync(file);
-          resolve(result.url);
+          resolve({ public_id: result.public_id, url: result.secure_url });
         });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function destroyFile(public_id) {
+  return new Promise((resolve, reject) => {
+    try {
+      cloudinary.uploader.destroy(public_id, async (error, result) => {
+        if (error) return reject(error);
+        if (result) resolve(true);
+      });
     } catch (error) {
       reject(error);
     }
@@ -103,4 +121,29 @@ const deletePlant = async (req, res) => {
   }
 };
 
-module.exports = { newPlant, createPlant, viewPlant, updatePlant, deletePlant };
+const deletePhoto = async (req, res) => {
+  try {
+    const plantId = req.params.id;
+    const photoId = req.query.photo;
+    const plant = await Plant.findById(plantId);
+
+    // Destroy in Cloudinary
+    const result = await destroyFile(photoId);
+    console.log(result);
+
+    // Delete in DB
+    const filtered = plant.photos.filter(photo => photo.public_id !== photoId);
+    const update = await Plant.findByIdAndUpdate(plantId, { photos: filtered });
+    console.log(update);
+    if (update) {
+      res.redirect(`/gardens/plants/${plantId}?updated=true`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+
+
+};
+
+module.exports = { newPlant, createPlant, viewPlant, updatePlant, deletePlant, deletePhoto };
