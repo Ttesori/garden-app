@@ -1,6 +1,8 @@
-const User = require('../models/User');
 const Garden = require('../models/Garden');
 const Plant = require('../models/Plant');
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+const { rejects } = require('assert');
 const TYPES = [
   'Artichokes', 'Arugula', 'Asparagus', 'Beets', 'Broccoli', 'Brussels Sprouts', 'Cabbage', 'Carrots', 'Cauliflower', 'Celery', 'Corn', 'Cucumbers', 'Edamame', 'Eggplants', 'Flowers', 'Garlic', 'Green Beans', 'Herbs', 'Horseradish', 'Kale', 'Kohlrabi', 'Lettuce', 'Okra', 'Onions', 'Parsnips', 'Peas', 'Peppers, Hot', 'Peppers, Sweet', 'Potatoes', 'Pumpkins', 'Radishes', 'Rhubarb', 'Rutabagas', 'Spinach', 'Sweet Potatoes', 'Swiss Chard', 'Tomatoes', 'Turnips', 'Winter Squash', 'Zucchini',];
 
@@ -51,16 +53,41 @@ const viewPlant = async (req, res) => {
 
 const updatePlant = async (req, res) => {
   try {
-    console.log('toupdate', req.body);
-    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, req.body);
+    console.log(req.files);
+    const filePath = req.files[0].path;
+    let link;
+    if (filePath) {
+      link = await uploadFile(filePath);
+    }
+    console.log(link);
+
+    // Update in DB
+    const plant = await Plant.findOne({ _id: req.params.id, user_id: req.user._id });
+    const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, { ...req.body, photos: [...plant.photos, link] });
     if (resp) {
       console.log(resp);
       res.redirect(`/gardens/plants/${req.params.id}?updated=true`);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
+
+function uploadFile(file) {
+  return new Promise((resolve, reject) => {
+    try {
+      cloudinary.uploader.upload(file,
+        async (error, result) => {
+          if (error) return reject(error);
+          //remove temp file
+          fs.unlinkSync(file);
+          resolve(result.url);
+        });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
 
 const deletePlant = async (req, res) => {
   try {

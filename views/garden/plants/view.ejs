@@ -11,10 +11,15 @@
   <%- include('../../_partials/header.ejs') %>
     <%- include('../../_partials/garden/user_nav.ejs') %>
       <h3>
-
+        <%= plant.name %>
       </h3>
+      <p>
+        <% plant.photos.forEach(photo=> { %>
+          <img src="<%= photo %>">
+          <%}) %>
+      </p>
 
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="name">Plant Name/Variety</label>
           <input type="text" name="name" id="name" value="<%= plant.name %>" required>
@@ -80,6 +85,11 @@
             <input type="text" name="pest_control" id="pest_control" placeholder="" value="<%= plant.pest_control %>">
           </div>
         </fieldset>
+        <div class="form-group">
+          <label class="form-label">Add a Photo</label>
+          <input class="form-control" type="file" name="post_file" id="post_file">
+        </div>
+
 
         <button>Update Plant</button>
       </form>

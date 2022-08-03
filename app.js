@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const methodOverride = require('method-override');
+const cloudinary = require('cloudinary').v2;
 const indexRoutes = require('./routes/index');
 const gardenRoutes = require('./routes/garden');
 const plantRoutes = require('./routes/plants');
@@ -32,6 +33,13 @@ app.use(session({
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Configure cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET
+});
 
 // Routes
 app.use('/', indexRoutes);
