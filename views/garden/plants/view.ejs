@@ -18,6 +18,9 @@
           <img src="<%= photo.url %>">
           <form method="post"
             action="/gardens/plants/<%= plant._id %>/photos?_method=DELETE&photo=<%= photo.public_id %>">
+            <p>
+              <%= photo.caption %>
+            </p>
             <button>X</button>
           </form>
           <%}) %>
@@ -89,10 +92,16 @@
             <input type="text" name="pest_control" id="pest_control" placeholder="" value="<%= plant.pest_control %>">
           </div>
         </fieldset>
-        <div class="form-group">
-          <label class="form-label">Add a Photo</label>
-          <input class="form-control" type="file" name="post_file" id="post_file">
-        </div>
+        <fieldset>
+          <legend>Photos</legend>
+          <div class="form-group">
+            <label class="form-label">Add a Photo</label>
+
+            <input class="form-control" type="file" name="post_file" id="post_file">
+            <input type="text" name="photo_caption" id="photo_caption" placeholder="Caption">
+          </div>
+        </fieldset>
+
 
 
         <button>Update Plant</button>

@@ -66,7 +66,8 @@ const updatePlant = async (req, res) => {
     const resp = await Plant.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, {
       ...req.body, photos: [...plant.photos, {
         public_id: photoData.public_id,
-        url: photoData.url
+        url: photoData.url,
+        caption: req.body.photo_caption
       }]
     });
     if (resp) {
@@ -141,9 +142,6 @@ const deletePhoto = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-
-
 };
 
 module.exports = { newPlant, createPlant, viewPlant, updatePlant, deletePlant, deletePhoto };
