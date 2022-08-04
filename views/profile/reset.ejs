@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../_partials/head.ejs'), {title: 'Reset Password' } %>
+</head>
+
+<body>
+  <%- include('../_partials/header.ejs') %>
+    <h2>Reset Password</h2>
+    <form method="post">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="text" id="email" name="email">
+        <button>Send Reset Email</button>
+    </form>
+    <%- include('../_partials/footer.ejs') %>
+</body>
+
+</html>

@@ -10,6 +10,7 @@ const cloudinary = require('cloudinary').v2;
 const indexRoutes = require('./routes/index');
 const gardenRoutes = require('./routes/garden');
 const plantRoutes = require('./routes/plants');
+const profileRoutes = require('./routes/profile');
 
 // Settings
 app.set('view engine', 'ejs');
@@ -45,6 +46,7 @@ cloudinary.config({
 app.use('/', indexRoutes);
 app.use('/gardens', gardenRoutes);
 app.use('/gardens/plants', plantRoutes);
+app.use('/profile', profileRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {

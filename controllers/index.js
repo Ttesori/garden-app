@@ -27,18 +27,21 @@ const getLogout = (req, res) => {
 
 // POST /login
 const postUser = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) { return next(err); }
-    if (!user) {
-      return res.redirect('/error=true');
-    }
-    req.logIn(user, (err) => {
+  try {
+    passport.authenticate('local', (err, user, info) => {
       if (err) { return next(err); }
-      console.log(user);
-      res.redirect('/garden');
-    });
-  })(req, res, next);
-
+      if (!user) {
+        return res.render('index', { error: true });
+      }
+      req.logIn(user, (err) => {
+        if (err) { return next(err); }
+        console.log(user);
+        res.redirect('/gardens');
+      });
+    })(req, res, next);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // POST /register

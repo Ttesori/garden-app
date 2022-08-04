@@ -1,8 +1,5 @@
-const User = require('../models/User');
 const Garden = require('../models/Garden');
 const Plant = require('../models/Plant');
-const bcrypt = require('bcrypt');
-const { marked } = require('marked');
 
 // GET /
 const getIndex = async (req, res) => {
@@ -11,64 +8,6 @@ const getIndex = async (req, res) => {
   const gardens = await Garden.find({ user_id: req.user._id });
   console.log(gardens);
   res.render('garden/index', { user: req.user, gardens: gardens });
-};
-
-const getProfile = (req, res) => {
-  res.render('garden/profile', { user: req.user });
-};
-
-const postProfile = async (req, res) => {
-  console.log(req.body, req.user);
-  const { email, password, name, zone } = req.body;
-
-  const newUser = {
-    email: req.user.email,
-    display_name: req.user.display_name,
-    zone: req.user.zone
-  };
-
-  // If new email, check if exists
-  console.log(email, req.user.email);
-  if (email !== req.user.email) {
-    const exists = await User.findOne({ email: email });
-    console.log(exists);
-    // If exists, redirect
-    if (exists) {
-      res.render('garden/profile', { user: req.user, msg: { type: 'error', text: 'Email already exists' } });
-    }
-    // Otherwise, save
-    newUser.email = email;
-    req.session.passport.user.email = email;
-  }
-
-  // If new password, hash
-  if (password) {
-    const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
-    const newPassword = hashed;
-    newUser.password = newPassword;
-    console.log(newPassword);
-  }
-
-  // Did display name change?
-  if (name) {
-    newUser.display_name = name;
-  }
-  // Did zone change?
-  if (zone) {
-    newUser.zone = zone;
-  }
-  console.log('updated', newUser);
-  // Update user
-  try {
-    const resp = await User.findByIdAndUpdate(req.user._id, newUser);
-    if (resp) {
-      console.log(resp);
-      res.render('garden/profile', { user: { ...req.user, ...newUser }, msg: { type: 'success', text: 'Profile updated successfully!' } });
-    }
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const newGarden = (req, res) => {
@@ -100,8 +39,6 @@ const singleGarden = async (req, res) => {
   try {
     const gardenId = req.params.id;
     const garden = await Garden.findById(gardenId);
-    const notes = marked.parse(garden.notes);
-    console.log('parseed', notes);
 
     const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
     res.render('garden/view', { garden: garden, plants: plants, notes: notes });
@@ -113,7 +50,6 @@ const singleGarden = async (req, res) => {
 const updateGarden = async (req, res) => {
   const { label, season, location, notes } = req.body;
   const gardenId = req.params.id;
-
 
   try {
     const gardenToUpdate = await Garden.find({ user_id: req.user._id, _id: gardenId });
@@ -137,7 +73,7 @@ const updateGarden = async (req, res) => {
     const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
     if (resp) {
       console.log(resp);
-      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants, notes: marked.parse(notes) });
+      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants, notes: notes });
     }
   } catch (error) {
     console.log(error);
@@ -176,4 +112,4 @@ const deleteGarden = async (req, res) => {
   }
 };
 
-module.exports = { getIndex, getProfile, postProfile, postGarden, newGarden, singleGarden, updateGarden, deleteGarden, archiveGarden };
+module.exports = { getIndex, postGarden, newGarden, singleGarden, updateGarden, deleteGarden, archiveGarden };

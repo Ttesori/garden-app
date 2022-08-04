@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-  <%- include('../_partials/head.ejs'), {title: 'My Profile' } %>
+  <%- include('./_partials/head.ejs'), {title: 'My Profile' } %>
     <title>Profile</title>
 </head>
 
 <body>
-  <%- include('../_partials/header.ejs') %>
-    <%- include('../_partials/garden/user_nav.ejs') %>
+  <%- include('./_partials/header.ejs') %>
+    <%- include('./_partials/garden/user_nav.ejs') %>
       <h2>User Profile</h2>
       <% if (locals.msg) { %>
         <div class="alert alert-<%= msg.type %>">
           <%= msg.text %>
         </div>
         <% } %>
-          <form method="post" action="/garden/profile">
+          <form method="post" action="/profile">
             <label for="email">Email</label>
             <input type="text" name="email" id="email" value="<%= user.email %>" required>
 
@@ -30,7 +30,7 @@
 
             <button>Update Profile</button>
           </form>
-          <%- include('../_partials/footer.ejs') %>
+          <%- include('./_partials/footer.ejs') %>
 </body>
 
 </html>

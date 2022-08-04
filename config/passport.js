@@ -9,12 +9,14 @@ module.exports = function (passport) {
       if (!user) {
         return done(null, false, { msg: `Email ${email} not found.` });
       }
-
+      console.log(user, password, user.password);
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) { return done(err); }
         if (isMatch) {
+          console.log(user);
           return done(null, user);
         }
+        return done(null, false, { msg: 'Invalid email or password' });
       });
     });
   }));

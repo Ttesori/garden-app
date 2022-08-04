@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
   zone: {
     type: String,
     default: ''
+  },
+  reset_link: {
+    type: String,
+    default: ''
   }
 
 }, { timestamps: true });
