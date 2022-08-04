@@ -1,6 +1,7 @@
 const passport = require('passport');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const validator = require('email-validator');
 
 // GET /
 const getIndex = (req, res) => {
@@ -49,8 +50,11 @@ const postRegister = async (req, res) => {
   const { email, password } = req.body;
 
   // Validate input
-  if (email.length < 3 || password.length < 3) {
-    return res.redirect('/register?errors=true');
+  if (!validator.validate(email)) {
+    return res.render('register', { error: 'Your email address is not valid' });
+  }
+  if (password.length < 6) {
+    return res.render('register', { error: 'Your password must be at least 6 characters' });
   }
 
   // Create user object

@@ -7,16 +7,25 @@
 
 <body>
   <%- include('./_partials/header.ejs') %>
-    <form method="POST" action="/register">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" required>
-
-      <label for="password">Password</label>
-      <input type="text" name="password" id="password" required>
-
-      <button>Sign Up</button>
-    </form>
-    <%- include('./_partials/footer.ejs') %>
+    <h2>Register</h2>
+    <% if (locals.error) { %>
+      <p class="alert">
+        <%= locals.error %>
+      </p>
+      <% } %>
+        <form method="POST" action="/register">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password" placeholder="At least 6 characters" required>
+          </div>
+          <button>Sign Up</button>
+        </form>
+        <a href="/">Sign In</a>
+        <%- include('./_partials/footer.ejs') %>
 </body>
 
 </html>
