@@ -11,18 +11,23 @@ const PlantSchema = new mongoose.Schema({
   },
   name: {
     type: String,
+    default: ''
   },
   type: {
     type: String,
+    default: ''
   },
   number_of_plants: {
     type: Number,
+    default: 1
   },
   planting_date: {
     type: String,
+    default: ''
   },
   source: {
     type: String,
+    default: ''
   },
   last_water: {
     type: String,
@@ -35,6 +40,7 @@ const PlantSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
+    default: ''
   },
   active: {
     type: Boolean,

@@ -41,39 +41,27 @@ const singleGarden = async (req, res) => {
     const garden = await Garden.findById(gardenId);
 
     const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
-    res.render('garden/view', { garden: garden, plants: plants, notes: notes });
+    res.render('garden/view', { garden: garden, plants: plants });
   } catch (error) {
     console.log(error);
   }
 };
 
 const updateGarden = async (req, res) => {
-  const { label, season, location, notes } = req.body;
   const gardenId = req.params.id;
 
   try {
     const gardenToUpdate = await Garden.find({ user_id: req.user._id, _id: gardenId });
-    const newGarden = {
-      label: gardenToUpdate.label,
-      season: gardenToUpdate.season,
-      location: gardenToUpdate.location,
-      notes: gardenToUpdate.notes
-    };
 
     if (!gardenToUpdate) {
       return res.send('Garden not found');
     }
-    console.log(notes);
-    if (label !== newGarden.label) newGarden.label = label;
-    if (season !== newGarden.season) newGarden.season = season;
-    if (location !== newGarden.location) newGarden.location = location;
-    if (notes !== newGarden.notes) newGarden.notes = notes;
 
-    const resp = await Garden.findByIdAndUpdate(gardenId, newGarden);
+    const resp = await Garden.findByIdAndUpdate(gardenId, { ...req.body }, { returnDocument: 'after' });
     const plants = await Plant.find({ garden_id: gardenId, user_id: req.user._id });
     if (resp) {
       console.log(resp);
-      res.render('garden/view', { garden: { ...resp, ...newGarden }, plants: plants, notes: notes });
+      res.render('garden/view', { garden: resp, plants: plants });
     }
   } catch (error) {
     console.log(error);

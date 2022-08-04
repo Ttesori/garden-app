@@ -92,7 +92,7 @@ const postReset = async (req, res) => {
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: '"Ty" <ttesori.dev@gmail.com>', // sender address
-      to: '"Toni" <ttesori@gmail.com>', // list of receivers
+      to: `"${user.name}" <${user.email}>`, // list of receivers
       subject: "Password Reset Link", // Subject line
       text: `Your link to reset your password is ${reset_link}`, // plain text body
       html: `<p>Your link to reset your password is <a href="${reset_link}">${reset_link}</a></p>`, // html body

@@ -8,7 +8,7 @@
 <body>
   <%- include('../_partials/header.ejs') %>
     <%- include('../_partials/garden/user_nav.ejs') %>
-      <h2>Welcome, <%= user.display_name %>!</h2>
+      <h2>Welcome, <%= user.display_name || 'Gardener' %>!</h2>
       <h3>My Gardens</h3>
       <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
         <h4>

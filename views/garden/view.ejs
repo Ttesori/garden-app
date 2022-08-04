@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../_partials/head.ejs') , {title: garden.label }%>
+  <%- include('../_partials/head.ejs', {title: garden.label }) %>
     <%- include('../_partials/garden/tiny.ejs'); %>
 </head>
 
@@ -21,7 +21,7 @@
         <%= garden.location %>
       </li>
       <li>Notes:
-        <%- locals.notes %>
+        <%- garden.notes %>
 
       </li>
       <h4>Plants</h4>
@@ -32,7 +32,7 @@
           </a> (<%= plant.number_of_plants %>)
         </li>
         <% }) %>
-          <a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a>
+          <p><a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a></p>
           <hr>
           <% if (garden.active) { %>
             <h3>Update Garden</h3>
@@ -54,7 +54,7 @@
 
               <div class="form-group">
                 <label for="Notes">Notes</label>
-                <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes %></textarea>
+                <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes || '' %></textarea>
               </div>
               <button type="submit">Update Garden</button>
             </form>

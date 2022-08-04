@@ -47,7 +47,7 @@ const postUser = (req, res, next) => {
 
 // POST /register
 const postRegister = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, display_name } = req.body;
 
   // Validate input
   if (!validator.validate(email)) {
@@ -59,7 +59,7 @@ const postRegister = async (req, res) => {
 
   // Create user object
   const user = new User({
-    email, password
+    email, password, display_name
   });
 
   // Check for existing user
@@ -82,7 +82,7 @@ const postRegister = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  res.redirect('/garden');
+  res.redirect('/gardens');
 };
 
 module.exports = { getIndex, getRegister, getLogout, postUser, postRegister };
