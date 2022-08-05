@@ -5,24 +5,40 @@
   <%- include('./_partials/head.ejs'), {title: 'Welcome' } %>
 </head>
 
-<body>
-  <%- include('./_partials/header.ejs') %>
-    <h2>Sign In</h2>
+<body class="flex min-h-screen justify-center items-center flex-col">
+
+  <div class="signin mt-3 mx-auto max-w-sm container bg-white p-5 text-center rounded-lg drop-shadow-md mb-3">
+    <h1 class="mb-2"><img src="img/sprout-vert.svg" alt="Sprout: A Garden Planner and Tracker Logo" class="mx-auto">
+    </h1>
+    <h2 class="signin__header sr-only">Sign In</h2>
     <% if (locals.error) { %>
       <p class="alert">ERROR: Email or Password Not Found</p>
       <% } %>
-        <form method="POST" action="/login">
-          <label for="email">Email</label>
-          <input type="text" name="email" id="email" required>
+        <form method="POST" action="/login" class="signin__form p-4">
+          <div class="form__group">
+            <label for="email" class="form__label">Email Address</label>
+            <input type="text" name="email" id="email" class="form__input" placeholder="you@anywhere.com" required>
+          </div>
 
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" required>
+          <div class="form__group">
+            <label for="password" class="form__label">Password</label>
+            <input type="password" name="password" id="password" required class="form__input"
+              placeholder="At least 6 characters">
+          </div>
 
-          <button>Sign In</button>
+          <button
+            class="btn btn--signin bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl mt-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg">Sign
+            In</button>
         </form>
-        <a href="/register">Register</a>
-        <a href="/profile/reset">Forgot Password</a>
-        <%- include('./_partials/footer.ejs') %>
+        <a href="/register"
+          class="font-serif text-green-dark underline decoration-green-light underline-offset-2 border-r border-gray mr-2 pr-3">Create
+          Account</a>
+        <a href="/profile/reset"
+          class="font-bold text-gray-dark underline underline-offset-2 decoration-gray text-sm">Forgot
+          Password?</a>
+  </div>
+
+  <%- include('./_partials/footer.ejs') %>
 </body>
 
 </html>

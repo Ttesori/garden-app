@@ -1,0 +1,28 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  @apply font-sans text-gray-darkest bg-gray-light;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-serif;
+}
+
+.form__group {
+  @apply grid grid-flow-row mb-2;
+}
+
+.form__label {
+  @apply font-bold mb-1;
+}
+
+.form__input {
+  @apply text-center bg-gray-light border border-gray p-2 rounded-lg hover:shadow-md transition-all outline-2 outline-transparent focus-visible:outline-2 focus-visible:outline-green-light;
+}
