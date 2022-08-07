@@ -2,34 +2,39 @@
 <html lang="en">
 
 <head>
-  <%- include('./_partials/head.ejs'), {title: 'Register' } %>
+  <%- include('./_partials/head.ejs', {title: 'Register' }) %>
 </head>
 
-<body>
-  <%- include('./_partials/header.ejs') %>
-    <h2>Register</h2>
+<body class="body--center_content">
+  <div class="register">
+    <h1 class="mb-5"><img src="img/sprout-vert.svg" alt="Sprout: A Garden Planner and Tracker Logo" class="mx-auto">
+    </h1>
+    <h2 class="mb-2 text-xl font-bold text-green-dark">Create Account</h2>
     <% if (locals.error) { %>
       <p class="alert">
         <%= locals.error %>
       </p>
       <% } %>
         <form method="POST" action="/register">
-          <div class="form-group">
-            <label for="display_name">Name</label>
-            <input type="text" name="display_name" id="display_name" placeholder="Amy Pond">
+          <div class="form__group">
+            <label for="display_name" class="form__label">Name</label>
+            <input type="text" name="display_name" id="display_name" placeholder="Amy Pond" class="form__input">
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="you@example.com" required>
+          <div class="form__group">
+            <label for="email" class="form__label">Email</label>
+            <input type="text" name="email" id="email" placeholder="you@example.com" required class="form__input">
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="text" name="password" id="password" placeholder="At least 6 characters" required>
+          <div class="form__group">
+            <label for="password" class="form__label">Password</label>
+            <input type="text" name="password" id="password" placeholder="At least 6 characters" required
+              class="form__input">
           </div>
-          <button>Sign Up</button>
+          <button class="btn btn--register mb-2">Sign Up</button>
         </form>
-        <a href="/">Sign In</a>
-        <%- include('./_partials/footer.ejs') %>
+        <a href="/" class="link--secondary">&laquo; Sign In</a>
+  </div>
+
+  <%- include('./_partials/footer.ejs') %>
 </body>
 
 </html>

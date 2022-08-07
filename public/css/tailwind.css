@@ -26,3 +26,24 @@ h4 {
 .form__input {
   @apply text-center bg-gray-light border border-gray p-2 rounded-lg hover:shadow-md transition-all outline-2 outline-transparent focus-visible:outline-2 focus-visible:outline-green-light;
 }
+
+.signin,
+.register {
+  @apply mt-3 mx-auto max-w-sm container bg-white p-5 text-center rounded-lg drop-shadow-md mb-3;
+}
+
+.btn {
+  @apply bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl mt-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg;
+}
+
+.link--secondary:link {
+  @apply font-serif text-green-dark underline decoration-green-light underline-offset-2;
+}
+
+.link--secondary:visited {
+  @apply text-gray-dark;
+}
+
+.body--center_content {
+  @apply flex min-h-screen justify-center items-center flex-col;
+}

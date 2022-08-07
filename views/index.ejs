@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <%- include('./_partials/head.ejs'), {title: 'Welcome' } %>
+  <%- include('./_partials/head.ejs', {title: 'Welcome' }) %>
 </head>
 
-<body class="flex min-h-screen justify-center items-center flex-col">
+<body class="body--center_content">
 
-  <div class="signin mt-3 mx-auto max-w-sm container bg-white p-5 text-center rounded-lg drop-shadow-md mb-3">
+  <div class="signin">
     <h1 class="mb-2"><img src="img/sprout-vert.svg" alt="Sprout: A Garden Planner and Tracker Logo" class="mx-auto">
     </h1>
     <h2 class="signin__header sr-only">Sign In</h2>
@@ -26,12 +26,10 @@
               placeholder="At least 6 characters">
           </div>
 
-          <button
-            class="btn btn--signin bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl mt-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg">Sign
+          <button class="btn btn--signin">Sign
             In</button>
         </form>
-        <a href="/register"
-          class="font-serif text-green-dark underline decoration-green-light underline-offset-2 border-r border-gray mr-2 pr-3">Create
+        <a href="/register" class="link--secondary border-r border-gray mr-2 pr-3">Create
           Account</a>
         <a href="/profile/reset"
           class="font-bold text-gray-dark underline underline-offset-2 decoration-gray text-sm">Forgot
