@@ -28,12 +28,17 @@ h4 {
 }
 
 .signin,
-.register {
-  @apply mt-3 mx-auto max-w-sm container bg-white p-5 text-center rounded-lg drop-shadow-md mb-3;
+.register,
+.reset {
+  @apply mx-auto max-w-sm container bg-white px-6 py-8 text-center rounded-lg drop-shadow-md mb-3;
+}
+
+.header--dialog {
+  @apply mb-2 text-xl font-bold text-green-dark;
 }
 
 .btn {
-  @apply bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl mt-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg;
+  @apply bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl my-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg;
 }
 
 .link--secondary:link {
@@ -41,9 +46,17 @@ h4 {
 }
 
 .link--secondary:visited {
-  @apply text-gray-dark;
+  @apply text-gray-dark decoration-gray;
 }
 
 .body--center_content {
   @apply flex min-h-screen justify-center items-center flex-col;
+}
+
+.alert {
+  @apply text-center mt-2 mb-4 bg-gray-light border border-gray rounded-lg px-4 py-3;
+}
+
+.alert--error {
+  @apply text-red-900 bg-red-50 border-red-400;
 }

@@ -7,31 +7,33 @@
 
 <body class="body--center_content">
   <div class="register">
-    <h1 class="mb-5"><img src="img/sprout-vert.svg" alt="Sprout: A Garden Planner and Tracker Logo" class="mx-auto">
-    </h1>
-    <h2 class="mb-2 text-xl font-bold text-green-dark">Create Account</h2>
-    <% if (locals.error) { %>
-      <p class="alert">
-        <%= locals.error %>
-      </p>
-      <% } %>
-        <form method="POST" action="/register">
-          <div class="form__group">
-            <label for="display_name" class="form__label">Name</label>
-            <input type="text" name="display_name" id="display_name" placeholder="Amy Pond" class="form__input">
-          </div>
-          <div class="form__group">
-            <label for="email" class="form__label">Email</label>
-            <input type="text" name="email" id="email" placeholder="you@example.com" required class="form__input">
-          </div>
-          <div class="form__group">
-            <label for="password" class="form__label">Password</label>
-            <input type="text" name="password" id="password" placeholder="At least 6 characters" required
-              class="form__input">
-          </div>
-          <button class="btn btn--register mb-2">Sign Up</button>
-        </form>
-        <a href="/" class="link--secondary">&laquo; Sign In</a>
+    <%- include('./_partials/header-vert.ejs') %>
+
+      <h2 class="header--dialog mt-4">Create Account</h2>
+      <form method="POST" action="/register">
+
+        <% if (locals.error) { %>
+          <p class="alert alert--error mt-4">
+            <strong>ERROR:</strong><br>
+            <%= locals.error %>
+          </p>
+          <% } %>
+            <div class="form__group">
+              <label for="display_name" class="form__label">Name</label>
+              <input type="text" name="display_name" id="display_name" placeholder="Amy Pond" class="form__input">
+            </div>
+            <div class="form__group">
+              <label for="email" class="form__label">Email</label>
+              <input type="text" name="email" id="email" placeholder="you@example.com" required class="form__input">
+            </div>
+            <div class="form__group">
+              <label for="password" class="form__label">Password</label>
+              <input type="text" name="password" id="password" placeholder="At least 6 characters" required
+                class="form__input">
+            </div>
+            <button class="btn btn--register mb-2">Sign Up</button>
+      </form>
+      <a href="/" class="link--secondary">&laquo; Sign In</a>
   </div>
 
   <%- include('./_partials/footer.ejs') %>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
 module.exports = {
   content: [
     './views/**/*.ejs',
@@ -18,7 +19,9 @@ module.exports = {
         light: '#ECEFF1',
         lightest: '#F2F5F7'
       },
-      white: '#fff'
+      white: '#fff',
+      red: colors.red,
+      yellow: colors.amber,
     },
     fontFamily: {
       sans: ['Open Sans', 'sans-serif'],

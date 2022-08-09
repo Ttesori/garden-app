@@ -2,20 +2,21 @@
 <html lang="en">
 
 <head>
-  <%- include('../_partials/head.ejs'), {title: 'Reset Password' } %>
+  <%- include('../_partials/head.ejs', {title: 'Reset Password' }) %>
 </head>
 
 <body>
   <%- include('../_partials/header.ejs') %>
-    <h2>Reset Password</h2>
+    <h2 class="header--dialog">Reset Password</h2>
     <% if (locals.error==='link' ) { %>
       <p class="alert">Cannot reset password. Contact administrator.</p>
       <%} if (!locals.error) { %>
         <form method="post">
-          <div class="form-group">
-            <label for="password">New Password</label>
-            <input type="password" id="password" name="password" required>
-            <button>Reset Password</button>
+          <div class="form__group">
+            <label for="password" class="form__label">New Password</label>
+            <input type="password" id="password" name="password" required class="form__input">
+            <button class="btn">Reset Password</button>
+          </div>
         </form>
         <% } %>
           <%- include('../_partials/footer.ejs') %>

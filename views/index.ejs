@@ -8,32 +8,31 @@
 <body class="body--center_content">
 
   <div class="signin">
-    <h1 class="mb-2"><img src="img/sprout-vert.svg" alt="Sprout: A Garden Planner and Tracker Logo" class="mx-auto">
-    </h1>
-    <h2 class="signin__header sr-only">Sign In</h2>
-    <% if (locals.error) { %>
-      <p class="alert">ERROR: Email or Password Not Found</p>
-      <% } %>
-        <form method="POST" action="/login" class="signin__form p-4">
-          <div class="form__group">
-            <label for="email" class="form__label">Email Address</label>
-            <input type="text" name="email" id="email" class="form__input" placeholder="you@anywhere.com" required>
-          </div>
+    <%- include('./_partials/header-vert.ejs') %>
+      <h2 class="signin__header sr-only">Sign In</h2>
+      <form method="POST" action="/login" class="signin__form p-4">
+        <% if (locals.error) { %>
+          <p class="alert alert--error"><strong>ERROR:</strong><br>Email or Password Not Found</p>
+          <% } %>
+            <div class="form__group">
+              <label for="email" class="form__label">Email Address</label>
+              <input type="text" name="email" id="email" class="form__input" placeholder="you@anywhere.com" required>
+            </div>
 
-          <div class="form__group">
-            <label for="password" class="form__label">Password</label>
-            <input type="password" name="password" id="password" required class="form__input"
-              placeholder="At least 6 characters">
-          </div>
+            <div class="form__group">
+              <label for="password" class="form__label">Password</label>
+              <input type="password" name="password" id="password" required class="form__input"
+                placeholder="At least 6 characters">
+            </div>
 
-          <button class="btn btn--signin">Sign
-            In</button>
-        </form>
-        <a href="/register" class="link--secondary border-r border-gray mr-2 pr-3">Create
-          Account</a>
-        <a href="/profile/reset"
-          class="font-bold text-gray-dark underline underline-offset-2 decoration-gray text-sm">Forgot
-          Password?</a>
+            <button class="btn btn--signin">Sign
+              In</button>
+      </form>
+      <a href="/register" class="link--secondary border-r border-gray mr-2 pr-3">Create
+        Account</a>
+      <a href="/profile/reset"
+        class="font-bold text-gray-dark underline underline-offset-2 decoration-gray text-sm">Forgot
+        Password?</a>
   </div>
 
   <%- include('./_partials/footer.ejs') %>
