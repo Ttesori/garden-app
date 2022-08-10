@@ -2,35 +2,35 @@
 <html lang="en">
 
 <head>
-  <%- include('../_partials/head.ejs'), {title: 'My Garden Dashboard' } %>
+  <%- include('../_partials/head.ejs', {title: 'My Garden Dashboard' } );%>
 </head>
 
 <body>
   <%- include('../_partials/header.ejs') %>
-    <%- include('../_partials/garden/user_nav.ejs') %>
-      <h2>Welcome, <%= user.display_name || 'Gardener' %>!</h2>
-      <h3>My Gardens</h3>
-      <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
-        <h4>
-          <a href="/gardens/<%= garden._id %>">
-            <%= garden.label %>
-          </a> (<%= garden.season %>)
-        </h4>
 
-        <% }) %>
-          <hr>
-          <a href="/gardens/new">Create New Garden</a>
+    <h2>Welcome, <%= user.display_name || 'Gardener' %>!</h2>
+    <h3>My Gardens</h3>
+    <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
+      <h4>
+        <a href="/gardens/<%= garden._id %>">
+          <%= garden.label %>
+        </a> (<%= garden.season %>)
+      </h4>
 
-          <h3>Archived Gardens</h3>
-          <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
-            <h4>
-              <a href="/gardens/<%= garden._id %>">
-                <%= garden.label %>
-              </a> (<%= garden.season %>)
-            </h4>
+      <% }) %>
+        <hr>
+        <a href="/gardens/new">Create New Garden</a>
 
-            <% }) %>
-              <%- include('../_partials/footer.ejs') %>
+        <h3>Archived Gardens</h3>
+        <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
+          <h4>
+            <a href="/gardens/<%= garden._id %>">
+              <%= garden.label %>
+            </a> (<%= garden.season %>)
+          </h4>
+
+          <% }) %>
+            <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>

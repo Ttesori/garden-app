@@ -60,3 +60,23 @@ h4 {
 .alert--error {
   @apply text-red-900 bg-red-50 border-red-400;
 }
+
+.header__logo {
+  @apply text-center py-4;
+}
+
+.header__logo-img {
+  @apply mx-auto;
+}
+
+.header {
+  @apply bg-gray-darkest text-center;
+}
+
+.nav {
+  @apply bg-green-light text-gray-darkest py-2;
+}
+
+.nav__link {
+  @apply px-5 font-bold text-sm;
+}
