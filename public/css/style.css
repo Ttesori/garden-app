@@ -590,7 +590,7 @@ h4 {
 
 .form__input:focus-visible {
   outline-width: 2px;
-  outline-color: #95D14F;
+  outline-color: #9FD661;
 }
 
 .signin, 
@@ -677,7 +677,7 @@ h4 {
   margin-bottom: 0.5rem;
   border-radius: 0.75rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(149 209 79 / var(--tw-bg-opacity));
+  background-color: rgb(159 214 97 / var(--tw-bg-opacity));
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.5rem;
@@ -706,7 +706,7 @@ h4 {
   --tw-text-opacity: 1;
   color: rgb(113 159 60 / var(--tw-text-opacity));
   text-decoration-line: underline;
-  text-decoration-color: #95D14F;
+  text-decoration-color: #9FD661;
   text-underline-offset: 2px;
 }
 
@@ -768,7 +768,7 @@ h4 {
 
 .nav {
   --tw-bg-opacity: 1;
-  background-color: rgb(149 209 79 / var(--tw-bg-opacity));
+  background-color: rgb(159 214 97 / var(--tw-bg-opacity));
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   --tw-text-opacity: 1;
