@@ -80,3 +80,11 @@ h4 {
 .nav__link {
   @apply px-5 font-bold text-sm;
 }
+
+.main {
+  @apply bg-white;
+}
+
+.footer {
+  @apply italic text-gray text-center py-3;
+}

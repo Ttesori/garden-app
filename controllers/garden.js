@@ -6,8 +6,8 @@ const getIndex = async (req, res) => {
   console.log(req.user);
   // Get All Gardens
   const gardens = await Garden.find({ user_id: req.user._id });
-  console.log(gardens);
-  res.render('garden/index', { user: req.user, gardens: gardens });
+  const plants = await Plant.find({ user_id: req.user._id });
+  res.render('garden/index', { user: req.user, gardens: gardens, plants: plants });
 };
 
 const newGarden = (req, res) => {

@@ -6,31 +6,42 @@
 </head>
 
 <body>
-  <%- include('../_partials/header.ejs') %>
-
-    <h2>Welcome, <%= user.display_name || 'Gardener' %>!</h2>
-    <h3>My Gardens</h3>
-    <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
-      <h4>
-        <a href="/gardens/<%= garden._id %>">
-          <%= garden.label %>
-        </a> (<%= garden.season %>)
-      </h4>
-
-      <% }) %>
-        <hr>
-        <a href="/gardens/new">Create New Garden</a>
-
-        <h3>Archived Gardens</h3>
-        <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
+  <%- include('../_partials/header.ejs', {user: user.display_name}) %>
+    <main class="main max-w-xl mx-auto p-6">
+      <div class="gardens">
+        <h2>My Gardens</h2>
+        <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
           <h4>
             <a href="/gardens/<%= garden._id %>">
               <%= garden.label %>
             </a> (<%= garden.season %>)
           </h4>
+          <ul>
+            <% plants.filter(plant=> plant.garden_id.toString() === garden._id.toString()).forEach(plant=> { %>
+              <li>
+                <%= plant.name %>
+              </li>
+              <% }) %>
+          </ul>
 
           <% }) %>
-            <%- include('../_partials/footer.ejs') %>
+            <hr>
+            <a href="/gardens/new">Create New Garden</a>
+
+            <h3>Archived Gardens</h3>
+            <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
+              <h4>
+                <a href="/gardens/<%= garden._id %>">
+                  <%= garden.label %>
+                </a> (<%= garden.season %>)
+              </h4>
+
+              <% }) %>
+      </div>
+
+    </main>
+
+    <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>
