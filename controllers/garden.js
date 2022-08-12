@@ -3,11 +3,14 @@ const Plant = require('../models/Plant');
 
 // GET /
 const getIndex = async (req, res) => {
-  console.log(req.user);
   // Get All Gardens
   const gardens = await Garden.find({ user_id: req.user._id });
   const plants = await Plant.find({ user_id: req.user._id });
-  res.render('garden/index', { user: req.user, gardens: gardens, plants: plants });
+  const gardens_active = gardens.filter(garden => garden.active);
+  const gardens_archived = gardens.filter(garden => !garden.active);
+  const gardens_with_plants = gardens_active.map(garden => ({ ...garden._doc, plants: plants.filter(plant => plant.garden_id.toString() === garden._id.toString()) }));
+
+  res.render('garden/index', { user: req.user, gardens: gardens_with_plants, archived: gardens_archived });
 };
 
 const newGarden = (req, res) => {

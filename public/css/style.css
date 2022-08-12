@@ -484,8 +484,20 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.flex {
+  display: flex;
+}
+
 .max-w-xl {
   max-width: 36rem;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .border-r {

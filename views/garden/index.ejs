@@ -9,34 +9,54 @@
   <%- include('../_partials/header.ejs', {user: user.display_name}) %>
     <main class="main max-w-xl mx-auto p-6">
       <div class="gardens">
-        <h2>My Gardens</h2>
-        <% gardens.filter(garden=> garden.active).forEach(garden=> { %>
-          <h4>
-            <a href="/gardens/<%= garden._id %>">
-              <%= garden.label %>
-            </a> (<%= garden.season %>)
-          </h4>
-          <ul>
-            <% plants.filter(plant=> plant.garden_id.toString() === garden._id.toString()).forEach(plant=> { %>
-              <li>
-                <%= plant.name %>
-              </li>
-              <% }) %>
-          </ul>
+        <header class="header--page flex justify-between">
+          <h2 class="page-title">My Gardens</h2>
+          <a href="/gardens/new">+ New Garden</a>
+        </header>
 
-          <% }) %>
-            <hr>
-            <a href="/gardens/new">Create New Garden</a>
-
-            <h3>Archived Gardens</h3>
-            <% gardens.filter(garden=> !garden.active).forEach(garden=> { %>
-              <h4>
+        <% gardens.forEach(garden=> { %>
+          <div class="garden">
+            <header class="garden__header">
+              <h4 class="garden-header__name">
                 <a href="/gardens/<%= garden._id %>">
                   <%= garden.label %>
-                </a> (<%= garden.season %>)
+                </a>
               </h4>
+              <span class="garden-header__season">
+                (<%= garden.season %>)
+              </span>
+            </header>
+            <article>
+              <% garden.plants.forEach(plant=> { %>
+                <div class="garden__plant">
+                  <span class="plant__name">
+                    <%= plant.name %>
+                  </span>
+                  <span class="plant__type">
+                    (<%= plant.type %>)
+                  </span>
+                  <span class="plant__watered">
+                    <%= plant.last_water %>
+                  </span>
+                  <span class="plant__age">
+                    <%= plant.planting_date %>
+                  </span>
+                </div>
+                <% }) %>
+            </article>
+          </div>
+          <% }) %>
 
-              <% }) %>
+            <% if (archived.length> 0) { %>
+              <h3>Archived Gardens</h3> %>
+              <% archived.forEach(garden=> { %>
+                <h4>
+                  <a href="/gardens/<%= garden._id %>">
+                    <%= garden.label %>
+                  </a> (<%= garden.season %>)
+                </h4>
+
+                <% })} %>
       </div>
 
     </main>
