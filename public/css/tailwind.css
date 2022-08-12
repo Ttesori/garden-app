@@ -41,6 +41,10 @@ h4 {
   @apply bg-green-light font-serif text-lg font-bold px-6 py-2 rounded-xl my-2 hover:bg-gray-darkest hover:text-white transition-all hover:shadow-lg;
 }
 
+.btn-sm {
+  @apply px-3 py-1 rounded-lg my-1 text-base;
+}
+
 .link--secondary:link {
   @apply font-serif text-green-dark underline decoration-green-light underline-offset-2;
 }
@@ -87,4 +91,8 @@ h4 {
 
 .footer {
   @apply italic text-gray text-center py-3;
+}
+
+.fa-solid {
+  @apply text-green p-1;
 }

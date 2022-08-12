@@ -3,65 +3,96 @@
 
 <head>
   <%- include('../_partials/head.ejs', {title: 'My Garden Dashboard' } );%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/fontawesome.min.css"
+      integrity="sha512-R+xPS2VPCAFvLRy+I4PgbwkWjw1z5B5gNDYgJN5LfzV4gGNeRQyVrY7Uk59rX+c8tzz63j8DeZPLqmXvBxj8pA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/solid.min.css"
+      integrity="sha512-EvFBzDO3WBynQTyPJI+wLCiV0DFXzOazn6aoy/bGjuIhGCZFh8ObhV/nVgDgL0HZYC34D89REh6DOfeJEWMwgg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
   <%- include('../_partials/header.ejs', {user: user.display_name}) %>
     <main class="main max-w-xl mx-auto p-6">
       <div class="gardens">
-        <header class="header--page flex justify-between">
-          <h2 class="page-title">My Gardens</h2>
-          <a href="/gardens/new">+ New Garden</a>
+        <header class="header--page flex justify-between mb-2 items-center">
+          <h2 class="page-title text-2xl font-serif font-bold">My Gardens</h2>
+          <a href="/gardens/new" class="btn btn-sm">+ New Garden</a>
         </header>
-
-        <% gardens.forEach(garden=> { %>
-          <div class="garden">
-            <header class="garden__header">
-              <h4 class="garden-header__name">
-                <a href="/gardens/<%= garden._id %>">
-                  <%= garden.label %>
-                </a>
-              </h4>
-              <span class="garden-header__season">
-                (<%= garden.season %>)
-              </span>
-            </header>
-            <article>
-              <% garden.plants.forEach(plant=> { %>
-                <div class="garden__plant">
-                  <span class="plant__name">
-                    <%= plant.name %>
-                  </span>
-                  <span class="plant__type">
-                    (<%= plant.type %>)
-                  </span>
-                  <span class="plant__watered">
-                    <%= plant.last_water %>
-                  </span>
-                  <span class="plant__age">
-                    <%= plant.planting_date %>
-                  </span>
-                </div>
-                <% }) %>
-            </article>
-          </div>
-          <% }) %>
-
-            <% if (archived.length> 0) { %>
-              <h3>Archived Gardens</h3> %>
-              <% archived.forEach(garden=> { %>
-                <h4>
+        <div class="gardens">
+          <% gardens.forEach(garden=> { %>
+            <div class="garden rounded-xl border border-gray-lighter mb-2 shadow-sm">
+              <header class="garden__header mb-3 text-center bg-gray-light p-3 rounded-tl-xl rounded-tr-xl">
+                <h4 class="garden-header__name text-xl font-serif font-bold">
                   <a href="/gardens/<%= garden._id %>">
                     <%= garden.label %>
-                  </a> (<%= garden.season %>)
+                  </a>
                 </h4>
+                <span class="garden-header__season italic">
+                  <%= garden.season %>
+                </span>
+              </header>
+              <article>
+                <% garden.plants.forEach(plant=> { %>
+                  <div class="garden__plant p-3">
+                    <span class="plant__name">
+                      <%= plant.name %>
+                    </span>
+                    <span class="plant__type">
+                      (<%= plant.type %>)
+                    </span>
+                    <span class="plant__watered">
+                      <span class="sr-only">Last Watered:</span>
+                      <i class="fa-solid fa-droplet"></i>
+                      <span class="watered__date">
+                        <%= plant.last_water %>
+                      </span>
+                    </span>
+                    <span class="plant__age">
+                      <span class="sr-only">Planted:</span>
+                      <i class="fa-solid fa-clock"></i>
+                      <span class="planted__date">
+                        <%= plant.planting_date %>
+                      </span>
+                    </span>
+                  </div>
+                  <% }) %>
+              </article>
+            </div>
+            <% }) %>
+        </div>
+        <% if (archived.length> 0) { %>
+          <h3>Archived Gardens</h3> %>
+          <% archived.forEach(garden=> { %>
+            <h4>
+              <a href="/gardens/<%= garden._id %>">
+                <%= garden.label %>
+              </a> (<%= garden.season %>)
+            </h4>
 
-                <% })} %>
+            <% })} %>
       </div>
 
     </main>
 
     <%- include('../_partials/footer.ejs') %>
+      <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.5/plugin/relativeTime.min.js"></script>
+      <script>
+        dayjs.extend(window.dayjs_plugin_relativeTime);
+        const wateredEls = document.querySelectorAll('.watered__date');
+        const plantedEls = document.querySelectorAll('.planted__date');
+        makeRelative(wateredEls);
+        makeRelative(plantedEls);
+
+        function makeRelative(els) {
+          els.forEach(el => {
+            const dateTxt = el.innerText;
+            el.innerText = dayjs(dateTxt).fromNow();
+          });
+        }
+
+      </script>
 </body>
 
 </html>
