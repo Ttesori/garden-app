@@ -94,5 +94,5 @@ h4 {
 }
 
 .fa-solid {
-  @apply text-green p-1;
+  @apply text-gray p-1;
 }
