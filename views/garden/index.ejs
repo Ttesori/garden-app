@@ -22,17 +22,24 @@
         <div class="gardens">
           <% gardens.forEach(garden=> { %>
             <div class="garden rounded-xl border border-gray-lighter mb-2 shadow-sm">
-              <header class="garden__header mb-3 text-center bg-gray-light p-3 rounded-tl-xl rounded-tr-xl">
-                <h4 class="garden-header__name text-xl font-serif font-bold">
+              <header class="garden__header text-center bg-gray-lightest p-3 rounded-tl-xl rounded-tr-xl">
+                <h3 class="garden-header__name text-xl font-serif font-bold">
                   <a href="/gardens/<%= garden._id %>">
                     <%= garden.label %>
                   </a>
-                </h4>
+                </h3>
                 <span class="garden-header__season italic">
                   <%= garden.season %>
                 </span>
               </header>
               <article>
+                <header class="plants-header">
+                  <h3 class="plants-header__title">Plants
+                    <button class="plants-header__btn"><i class="fa-solid fa-circle-plus"></i> <span class="sr-only">Add
+                        New Plant</span></button>
+                  </h3>
+
+                </header>
                 <% garden.plants.forEach(plant=> { %>
                   <div class="garden__plant p-3">
                     <span class="plant__name">
@@ -87,7 +94,8 @@
         function getDays(els) {
           els.forEach(el => {
             const dateTxt = el.innerText;
-            el.innerText = Math.floor(now.diff(dayjs(dateTxt), 'hour') / 24) + ' days';
+            const diff = Math.floor(now.diff(dayjs(dateTxt), 'hour') / 24);
+            el.innerText = diff > 0 ? `${diff} days` : 'Today';
           });
         }
 

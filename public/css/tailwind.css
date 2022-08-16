@@ -96,3 +96,32 @@ h4 {
 .fa-solid {
   @apply text-gray p-1;
 }
+
+.watered__date,
+.planted__date {
+  @apply text-sm italic;
+}
+
+.plant__name {
+  @apply font-bold;
+}
+
+.plant__type {
+  @apply text-gray-dark text-sm;
+}
+
+.plants-header {
+  @apply bg-green-light py-1;
+}
+
+.plants-header__title {
+  @apply font-serif text-lg text-center font-bold leading-none;
+}
+
+.plants-header__title .fa-solid {
+  @apply text-gray-darkest;
+}
+
+.plants-header__btn {
+  @apply text-xl;
+}
