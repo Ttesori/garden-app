@@ -9,33 +9,34 @@
 
 <body>
   <%- include('../_partials/header.ejs') %>
-    <%- include('../_partials/garden/user_nav.ejs') %>
-      <h3>Create a Garden</h3>
+    <main class="main">
+      <h3 class="page-title">Create a Garden</h3>
       <form method="post">
-        <div class="form-group">
-          <label for="label">Garden Label</label>
-          <input type="text" name="label" id="label" placeholder="">
+        <div class="form__group">
+          <label for="label" class="form__label">Garden Label</label>
+          <input type="text" name="label" id="label" placeholder="Backyard - South" class="form__input">
         </div>
 
-        <div class="form-group">
-          <label for="season">Season</label>
-          <input type="text" name="season" id="season" placeholder="">
+        <div class="form__group">
+          <label for="season" class="form__label">Season</label>
+          <input type="text" name="season" id="season" placeholder="Spring 2045" class="form__input">
         </div>
 
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" name="location" id="location" placeholder="">
+        <div class="form__group">
+          <label for="location" class="form__label">Location</label>
+          <input type="text" name="location" id="location" placeholder="Southeast corner of the backyard"
+            class="form__input">
         </div>
 
-        <div class="form-group">
-          <label for="Notes">Notes</label>
-          <textarea type="text" name="notes" id="notes" placeholder=""></textarea>
+        <div class="form__group">
+          <label for="Notes" class="form__label">Notes</label>
+          <textarea type="text" name="notes" id="notes" placeholder="" class="form__input"></textarea>
         </div>
 
-        <button>Create Garden</button>
+        <button class="btn">Create Garden</button>
       </form>
-
-      <%- include('../_partials/footer.ejs') %>
+    </main>
+    <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>

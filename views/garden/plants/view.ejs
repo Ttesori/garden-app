@@ -9,7 +9,7 @@
 
 <body>
   <%- include('../../_partials/header.ejs') %>
-    <%- include('../../_partials/garden/user_nav.ejs') %>
+    <main class="main">
       <h3>
         <%= plant.name %> <small>(<%= plant.number_of_plants %>)</small>
       </h3>
@@ -126,8 +126,8 @@
       <form method="post" action="/gardens/plants/<%= plant._id %>?_method=DELETE"><button type="submit">Remove
           Plant</button></form>
 
-
-      <%- include('../../_partials/footer.ejs') %>
+    </main>
+    <%- include('../../_partials/footer.ejs') %>
 </body>
 
 </html>

@@ -15,6 +15,10 @@ h4 {
   @apply font-serif;
 }
 
+p {
+  @apply mb-1;
+}
+
 .form__group {
   @apply grid grid-flow-row mb-2;
 }
@@ -24,7 +28,11 @@ h4 {
 }
 
 .form__input {
-  @apply text-center bg-gray-light border border-gray p-2 rounded-lg hover:shadow-md transition-all outline-2 outline-transparent focus-visible:outline-2 focus-visible:outline-green-light;
+  @apply bg-gray-light border border-gray p-2 rounded-lg hover:shadow-md transition-all outline-2 outline-transparent focus-visible:outline-2 focus-visible:outline-green-light;
+}
+
+.input--login {
+  @apply text-center;
 }
 
 .signin,
@@ -86,7 +94,7 @@ h4 {
 }
 
 .main {
-  @apply bg-white;
+  @apply bg-white  max-w-xl mx-auto p-6;
 }
 
 .footer {
@@ -146,4 +154,16 @@ h4 {
 
 .garden__plant {
   @apply relative;
+}
+
+.page-title {
+  @apply mb-2 text-xl font-bold text-green-dark;
+}
+
+.page-subtitle {
+  @apply mb-1 text-lg font-bold text-green-dark pt-2;
+}
+
+.page-subtitle--2 {
+  @apply mb-1 text-base text-green pt-1;
 }

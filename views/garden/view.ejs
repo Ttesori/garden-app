@@ -8,23 +8,24 @@
 
 <body>
   <%- include('../_partials/header.ejs') %>
-    <%- include('../_partials/garden/user_nav.ejs') %>
-      <h2>
+    <main class="main">
+      <h2 class="page-title">
         <%= garden.label %>
-          <% if (!garden.active) { %> <small>(Archived) </small>
-            <%} %>
+          (<%= garden.season %>)
+            <% if (!garden.active) { %> <small>(Archived) </small>
+              <%} %>
       </h2>
-      <h3>Season:
-        <%= garden.season %>
-      </h3>
-      <li>Location:
+      <h3 class="page-subtitle">Location</h3>
+      <p>
         <%= garden.location %>
-      </li>
-      <li>Notes:
-        <%- garden.notes %>
+      </p>
 
-      </li>
-      <h4>Plants</h4>
+      <h3 class="page-subtitle">Notes</h3>
+      <p>
+        <%- garden.notes %>
+      </p>
+
+      <h4 class="page-subtitle page-subtitle--2">Plants</h4>
       <% locals.plants.forEach(plant=> { %>
         <li>
           <a href="/gardens/plants/<%= plant._id %>">
@@ -32,45 +33,53 @@
           </a> (<%= plant.number_of_plants %>)
         </li>
         <% }) %>
-          <p><a href="/gardens/plants/new?garden=<%= garden._id %>">Add New Plant</a></p>
-          <hr>
+          <p class="mt-2"><a href="/gardens/plants/new?garden=<%= garden._id %>" class="btn btn-sm">Add New Plant</a>
+          </p>
+
+          <hr class="my-4 bg-gray-lighter border-gray-lighter">
+
           <% if (garden.active) { %>
-            <h3>Update Garden</h3>
+            <h3 class="page-subtitle">Update Garden</h3>
             <form method="post">
-              <div class="form-group">
-                <label for="label">Garden Label</label>
-                <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required>
+              <div class="form__group">
+                <label for="label" class="form__label">Garden Label</label>
+                <input type="text" name="label" id="label" value="<%= garden.label %>" placeholder="" required
+                  class="form__input">
               </div>
 
-              <div class="form-group">
-                <label for="season">Season</label>
-                <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>">
+              <div class="form__group">
+                <label for="season" class="form__label">Season</label>
+                <input type="text" name="season" id="season" placeholder="" value="<%= garden.season %>"
+                  class="form__input">
               </div>
 
-              <div class="form-group">
-                <label for="location">Location</label>
-                <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>">
+              <div class="form__group">
+                <label for="location" class="form__label">Location</label>
+                <input type="text" name="location" id="location" placeholder="" value="<%= garden.location %>"
+                  class="form__input">
               </div>
 
-              <div class="form-group">
-                <label for="Notes">Notes</label>
+              <div class="form__group">
+                <label for="Notes" class="form__label">Notes</label>
                 <textarea type="text" name="notes" id="notes" placeholder=""><%= garden.notes || '' %></textarea>
               </div>
-              <button type="submit">Update Garden</button>
+              <button type="submit" class="btn my-2">Update Garden</button>
             </form>
             <% } %>
 
-              <h4>Delete Garden</h4>
-              <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit">Remove
+              <hr class="my-4 bg-gray-lighter border-gray-lighter">
+
+              <form method="post" action="/gardens/<%= garden._id %>?_method=DELETE"><button type="submit"
+                  class="btn btn-sm">Remove
                   Garden</button></form>
 
               <% if (garden.active) { %>
-                <h4>Archive Garden</h4>
-                <form method="post" action="/gardens/<%= garden._id %>/archive"><button type="submit">Archive
+                <form method="post" action="/gardens/<%= garden._id %>/archive"><button type="submit"
+                    class="btn btn-sm">Archive
                     Garden</button></form>
                 <% } %>
-
-                  <%- include('../_partials/footer.ejs') %>
+    </main>
+    <%- include('../_partials/footer.ejs') %>
 </body>
 
 </html>
