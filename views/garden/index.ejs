@@ -21,15 +21,18 @@
         </header>
         <div class="gardens">
           <% gardens.forEach(garden=> { %>
-            <div class="garden rounded-xl border border-gray-lighter mb-2 shadow-sm">
-              <header class="garden__header text-center bg-gray-lightest p-3 rounded-tl-xl rounded-tr-xl">
-                <h3 class="garden-header__name text-xl font-serif font-bold">
+            <div class="garden">
+              <header class="garden__header">
+                <h3 class="garden-header__name">
                   <a href="/gardens/<%= garden._id %>">
                     <%= garden.label %>
                   </a>
                 </h3>
                 <span class="garden-header__season italic">
                   <%= garden.season %>
+                </span>
+                <span class="garden-header__actions">
+                  <a href="#" class="btn btn-sm">Edit</a>
                 </span>
               </header>
               <article>
@@ -61,6 +64,9 @@
                       <span class="planted__date">
                         <%= plant.planting_date %>
                       </span>
+                    </span>
+                    <span class="plant__actions">
+                      <a href="#" class="btn btn-sm">Edit</a>
                     </span>
                   </div>
                   <% }) %>

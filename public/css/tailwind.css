@@ -125,3 +125,25 @@ h4 {
 .plants-header__btn {
   @apply text-xl;
 }
+
+.garden {
+  @apply rounded-xl border border-gray-lighter mb-2 shadow-sm relative;
+}
+
+.garden__header {
+  @apply text-center bg-gray-lightest p-3 rounded-tl-xl rounded-tr-xl;
+}
+
+.garden-header__name {
+  @apply text-xl font-serif font-bold;
+}
+
+.garden-header__actions {
+  top: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+}
+
+.garden__plant {
+  @apply relative;
+}

@@ -500,22 +500,6 @@ video {
   justify-content: space-between;
 }
 
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
-.rounded-tl-xl {
-  border-top-left-radius: 0.75rem;
-}
-
-.rounded-tr-xl {
-  border-top-right-radius: 0.75rem;
-}
-
-.border {
-  border-width: 1px;
-}
-
 .border-r {
   border-right-width: 1px;
 }
@@ -523,21 +507,6 @@ video {
 .border-gray {
   --tw-border-opacity: 1;
   border-color: rgb(153 179 191 / var(--tw-border-opacity));
-}
-
-.border-gray-lighter {
-  --tw-border-opacity: 1;
-  border-color: rgb(208 219 226 / var(--tw-border-opacity));
-}
-
-.bg-gray-light {
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 239 241 / var(--tw-bg-opacity));
-}
-
-.bg-gray-lightest {
-  --tw-bg-opacity: 1;
-  background-color: rgb(242 245 247 / var(--tw-bg-opacity));
 }
 
 .p-4 {
@@ -556,10 +525,6 @@ video {
   padding-right: 0.75rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .font-serif {
   font-family: Merriweather, serif;
 }
@@ -572,11 +537,6 @@ video {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -602,12 +562,6 @@ video {
 
 .underline-offset-2 {
   text-underline-offset: 2px;
-}
-
-.shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 body {
@@ -927,4 +881,42 @@ h4 {
 .plants-header__btn {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.garden {
+  position: relative;
+  margin-bottom: 0.5rem;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(208 219 226 / var(--tw-border-opacity));
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.garden__header {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 245 247 / var(--tw-bg-opacity));
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.garden-header__name {
+  font-family: Merriweather, serif;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+.garden-header__actions {
+  top: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+}
+
+.garden__plant {
+  position: relative;
 }
