@@ -2,33 +2,41 @@
 <html lang="en">
 
 <head>
-  <%- include('./_partials/head.ejs'), {title: 'My Profile' } %>
+  <%- include('./_partials/head.ejs', {title: 'My Profile' }) %>
     <title>Profile</title>
 </head>
 
 <body>
   <%- include('./_partials/header.ejs') %>
     <main class="main">
-      <h2>User Profile</h2>
+      <h2 class="page-title">User Profile</h2>
       <% if (locals.msg) { %>
         <div class="alert alert-<%= msg.type %>">
           <%= msg.text %>
         </div>
         <% } %>
           <form method="post" action="/profile">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="<%= user.email %>" required>
+            <div class="form__group">
+              <label for="email" class="form__label">Email</label>
+              <input type="text" name="email" id="email" value="<%= user.email %>" required class="form__input">
+            </div>
 
-            <label for="password">New Password</label>
-            <input type="password" name="password" id="password">
+            <div class="form__group">
+              <label for="password" class="form__label">New Password</label>
+              <input type="password" name="password" id="password" class="form__input">
+            </div>
 
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="<%= user.display_name %>">
+            <div class="form__group">
+              <label for="name" class="form__label">Name</label>
+              <input type="text" name="name" id="name" value="<%= user.display_name %>" class="form__input">
+            </div>
 
-            <label for="zone">Garden Zone</label>
-            <input type="text" name="zone" id="zone" value="<%= user.zone %>">
+            <div class="form__group">
+              <label for="zone" class="form__label">Garden Zone</label>
+              <input type="text" name="zone" id="zone" value="<%= user.zone %>" class="form__input">
+            </div>
 
-            <button>Update Profile</button>
+            <button class="btn">Update Profile</button>
           </form>
     </main>
     <%- include('./_partials/footer.ejs') %>
